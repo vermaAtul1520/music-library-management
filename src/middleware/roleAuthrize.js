@@ -1,20 +1,22 @@
+const createResponse = require('../utils/createResponse');
+
 const authorize = (...allowedRoles) => {
     return (req, res, next) => {
         try {
-            const user = req.user; // Assumes `req.user` contains user info after authentication
+            const user = req.user;
 
             if (!user) {
-                return res.status(401).json({ message: 'Unauthorized: No user data' });
+                return res.status(401).json(createResponse(401, null, 'Unauthorized: No user data', null));
             }
 
             if (!allowedRoles.includes(user.role)) {
-                return res.status(403).json({ message: 'Forbidden: You do not have access' });
+                return res.status(403).json(createResponse(403, null, 'Forbidden: You do not have access', null));
             }
 
-            next(); // User is authorized, proceed to the next middleware or route handler
+            next();
         } catch (error) {
             console.error('Authorization error:', error);
-            res.status(500).json({ message: 'Internal Server Error' });
+            res.status(500).json(createResponse(500, null, 'Internal Server Error', error.message));
         }
     };
 };

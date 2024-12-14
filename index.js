@@ -1,7 +1,7 @@
 const express = require('express');
 const { connectToDatabase, closeConnection } = require('./src/config/mongoConnection');
 const {protect} = require('./src/middleware/authMiddleware');
-const createOrgRouter = require('./src/routes/organization')
+const missclinousRouter = require('./src/routes/misclinous')
 const userRouter =  require('./src/routes/user')
 require('dotenv').config()
 const PORT = process.env.PORT;
@@ -13,9 +13,8 @@ app.use(express.json());
 app.use(protect);
 
 // create org..
-app.use('/create-organization-admin', createOrgRouter)
 app.use('/users',userRouter)
-
+app.use('/', missclinousRouter)
 
 // Start the server and connect to the database
 const startServer = async () => {
