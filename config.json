@@ -1,0 +1,16 @@
+{
+    "cpuThreshold": 80,            
+    "memoryThreshold": 30,       
+    "checkInterval": 10,            
+    "alertEmail": "admin@example.com",
+    "smtp": {                       
+      "host": "smtp.gmail.com",
+      "port": 587,
+      "secure": false,
+      "auth": {
+        "user": "your-email@example.com",
+        "pass": "your-email-password"
+      }
+    }
+  }
+  
