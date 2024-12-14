@@ -1,6 +1,8 @@
 const express = require('express');
 const { connectToDatabase, closeConnection } = require('./src/config/mongoConnection');
-const {protect} = require('./src/middleware/authMiddleware')
+const {protect} = require('./src/middleware/authMiddleware');
+const createOrgRouter = require('./src/routes/organization')
+const userRouter =  require('./src/routes/user')
 require('dotenv').config()
 const PORT = process.env.PORT;
 const app = express();
@@ -9,6 +11,10 @@ app.use(express.json());
 
 // attaching middleware globaly for all api and hanlde the exclusion of /login and
 app.use(protect);
+
+// create org..
+app.use('/create-organization-admin', createOrgRouter)
+app.use('/users',userRouter)
 
 
 // Start the server and connect to the database

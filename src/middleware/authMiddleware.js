@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 // const User = require("../models/User");
 
-const unprotectedRoutes = ["/api/users/login", "/api/users/signup"];
+const unprotectedRoutes = ["/api/users/login", "/api/users/signup","/create-organization-admin"];
 
 const protect = async (req, res, next) => {
   if (unprotectedRoutes.includes(req.path)) {
