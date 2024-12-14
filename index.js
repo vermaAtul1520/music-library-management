@@ -2,12 +2,14 @@ const express = require('express');
 const { connectToDatabase, closeConnection } = require('./src/config/mongoConnection');
 const {protect} = require('./src/middleware/authMiddleware');
 const missclinousRouter = require('./src/routes/misclinous')
-const userRouter =  require('./src/routes/user')
+const userRouter =  require('./src/routes/user');
+const logRequest = require('./src/middleware/logging');
 require('dotenv').config()
 const PORT = process.env.PORT;
 const app = express();
 
 app.use(express.json());
+app.use(logRequest)
 
 // attaching middleware globaly for all api and hanlde the exclusion of /login and
 app.use(protect);
